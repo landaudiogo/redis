@@ -522,6 +522,7 @@ static void readHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
                 int requests_finished = 0;
                 atomicGetIncr(config.requests_finished, requests_finished, 1);
                 if (requests_finished < config.requests){
+                        fprintf(stderr, "%lld,%lld,%lld\n", c->start, c->start + c->latency, c->latency);
                         if (config.num_threads == 0) {
                             hdr_record_value(
                             config.latency_histogram,  // Histogram to record to
